@@ -36,7 +36,7 @@ const Navbar = ({ getPlaylistById }) => {
 				<Container maxWidth={'lg'}>
 					<Toolbar>
 						<Stack sx={{ flexGrow: 1 }}>
-							<Typography variant='h4'>Clean Youtube</Typography>
+							<Typography variant='h4'>Youtube Playlist</Typography>
 							<Typography variant='body1'>
 								By Protik
 							</Typography>
