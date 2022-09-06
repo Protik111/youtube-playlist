@@ -1,15 +1,34 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import getPlaylist from "../api";
+import storage from "../utils/Storage";
+
+const storageKey = 'yt_playlist';
+const initState = {
+    playlists: {},
+    favorites: [],
+    recentsPlaylists: []
+};
+
 
 const usePlaylists = () => {
-    const [state, setState] = useState({
-        playlists: {},
-        favorites: [],
-        recentsPlaylists: []
-    });
+    const [state, setState] = useState(initState);
 
     const [error, setError] = useState('');
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const savedState = storage.get(storageKey);
+
+        if(savedState) {
+            setState({ ...savedState })
+        }
+    }, []);
+
+    useEffect(() => {
+        if(state !== initState) {
+            storage.save(storageKey, state)
+        }
+    }, [state])
 
     const getPlaylistById = async (playlistId, refresh=false) => {
         if (state.playlists[playlistId] && !refresh) {

@@ -10,7 +10,7 @@ const getPlaylistItem = async (playListId, nextPageToken = '', results = []) => 
     results = [...results, ...data.items]
 
     if(data.nextPageToken) {
-        results = getPlaylist(playListId, data.nextPageToken, results)
+        results = getPlaylistItem(playListId, data.nextPageToken, results)
     }
 
     return results;
